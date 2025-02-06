@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from scan2mail.views import hello_geeks, process_qr
+from scan2mail.views import home, process_qr
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('geek/', hello_geeks),
+    path('', home),
     path('gen_qr/', process_qr, name='gen_qr')
 ]

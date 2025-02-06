@@ -1,15 +1,11 @@
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode, quote, quote_plus
 import qrcode
 import requests
 import base64
 import io
 
-from random import randint as rr
-
-API_TOKEN = ''
-
-def generate_qr(to, subject, body):
-    url = f'mailto:?{urlencode({"to":to,"subject":subject,"body":body},quote_via=quote)}'
+def generate_qr(to, subject, body, api_key, cc='', bcc='', alias=None):
+    url = f'mailto:?{urlencode({"to":to,"cc":cc,"bcc":bcc,"subject":subject,"body":body},quote_via=quote)}'
 
     # Shorten mailto link using tinyurl api
     headers = {
@@ -18,19 +14,25 @@ def generate_qr(to, subject, body):
     }
 
     params = {
-        'api_token': API_TOKEN,
+        'api_token': api_key,
     }
 
+    if alias is None:
+        alias = quote_plus(subject).replace('+','-')
     json_data = {
         'url': url,
         'domain': 'tinyurl.com',
-        'alias': f'adamstest{rr(0,100000)}',
+        'alias': alias,
         'description': 'string',
     }
 
     response = requests.post('https://api.tinyurl.com/create', params=params, headers=headers, json=json_data)
-    tiny_url = response.json()['data']['tiny_url']
+    
+    print(params)
+    print(json_data)
     print(response.json()) # For logging
+    
+    tiny_url = response.json()['data']['tiny_url']
 
     # Generate qr code in base64
     qr = qrcode.make(tiny_url)
