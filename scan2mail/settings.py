@@ -74,6 +74,12 @@ WSGI_APPLICATION = 'scan2mail.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+os.environ.setdefault("PGDATABASE", "dummy")
+os.environ.setdefault("PGUSER", "dummy")
+os.environ.setdefault("PGPASSWORD", "dummy")
+os.environ.setdefault("PGHOST", "localhost")
+os.environ.setdefault("PGPORT", "5432")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
