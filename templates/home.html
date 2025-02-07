@@ -11,7 +11,16 @@
 </head>
 <body>
 <div class="container">
+<div class="palestine-flag">
+    <div class="flag-top"></div>
+    <div class="flag-middle"></div>
+    <div class="flag-triangle"></div>
+</div>
+<div class="palestine-text">Free Palestine!</div>
 <h2 class="text-center">scan2mail</h2>
+<div class="text-center mb-3">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#howItWorksModal">How it works</button>
+    </div>
 <form id="nameForm" method = "post">
     {% csrf_token %}
     <div class="mb-3">
@@ -24,6 +33,44 @@
 <h3  class="text-center mt-3"><a id="resultText"></a></h3>
 <div class="text-center mb-3"><img id="ItemPreview" class="rounded" src=""></div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="howItWorksModal" tabindex="-1" aria-labelledby="howItWorksLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="howItWorksLabel">How It Works</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This simple web app allows you to generate a QR code, such that when scanned an email client is opened automatically with a predefined email.</p>
+                <p>The QR code is based on a <a href="https://tinyurl.com/">tinyurl</a> shortened link. So, you will need a tinyurl account to use this tool.</p>
+                <p>To generate the QR code, fill in the following mandatory fields:</p>
+                <ul>
+                    <li>To: recipients' email addresses separated by commas</li>
+                    <li>Subject: subject of the email</li>
+                    <li>Body: text of the email</li>
+                    <li>API key (tinyurl): API key to connect to your tinyurl account (see below)</li>
+                    <li>Alias (tinyurl): the alias in your shortened link e.g. tinyurl.com/your-alias-comes-here. Make sure the alias you choose is unique and valid for urls.</li>
+                </ul>
+                <p>After filling the fields, click on "Generate QR Code", and the result should then appear below the fields.</p>
+                <p>Follow the following steps to generate an API key for your tinyurl account:</p>
+                <ol>
+                    <li>Login on <a>https://tinyurl.com</a></li>
+                    <li>Click on your name at the top right of the screen</li>
+                    <li>In the left navigation pane, click on "API"</li>
+                    <li>Enter a "Token name". This is any name you choose for the key.</li>
+                    <li>Click "Create Token".</li>
+                    <li>Save this API token/key somewhere you can retrieve it from.</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $("#nameForm").submit(function(event) {
