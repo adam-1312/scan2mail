@@ -74,9 +74,6 @@ WSGI_APPLICATION = 'scan2mail.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-<<<<<<< HEAD
-DATABASES = {}
-=======
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -87,8 +84,6 @@ DATABASES = {
         'PORT': os.environ["PGPORT"],
     }
 }
->>>>>>> a0b3765 (preparing for deploying on railway)
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
